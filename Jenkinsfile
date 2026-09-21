@@ -103,3 +103,39 @@ pipeline {
     }
 }
 
+post {
+    success {
+        emailext(
+            subject: "SUCCESS: ${env.JOB_NAME} #${env.BUILD_NUMBER}",
+            body: """
+                Deployment Successful!
+
+                Job: ${env.JOB_NAME}
+                Build: #${env.BUILD_NUMBER}
+                Status: SUCCESS
+
+                Docker deployment completed successfully.
+                Build URL: ${env.BUILD_URL}
+            """,
+            to: "sasikala.bedre@gmail.com"
+        )
+    }
+
+    failure {
+        emailext(
+            subject: "FAILED: ${env.JOB_NAME} #${env.BUILD_NUMBER}",
+            body: """
+                Deployment Failed!
+
+                Job: ${env.JOB_NAME}
+                Build: #${env.BUILD_NUMBER}
+                Status: FAILED
+
+                Please check the Jenkins console output.
+                Build URL: ${env.BUILD_URL}
+            """,
+            to: "your-email@gmail.com"
+        )
+    }
+}
+
