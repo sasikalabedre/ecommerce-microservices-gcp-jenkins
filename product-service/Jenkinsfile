@@ -1,0 +1,40 @@
+pipeline {
+    agent any
+
+    environment {
+        SERVICE_NAME = 'product-service' // ⬅ Change to product-service or order-service as needed
+        DOCKER_USERNAME = 'tanvirmulla11'
+        IMAGE_TAG = "${BUILD_NUMBER}"
+        DOCKER_IMAGE = "${DOCKER_USERNAME}/${SERVICE_NAME}:${IMAGE_TAG}"
+    }
+
+    stages {
+        stage('Clone Repo') {
+            steps {
+                git branch: 'main', credentialsId: 'github-token', url: 'https://github.com/tanvirmulla11/ecommerce-microservices.git'
+            }
+        }
+
+        stage('Build Docker Image') {
+            steps {
+                sh '''
+                    echo "🔨 Building Docker image..."
+                    docker build -t $DOCKER_IMAGE ./$SERVICE_NAME
+                '''
+            }
+        }
+
+        stage('Push to Docker Hub') {
+            steps {
+                withCredentials([usernamePassword(credentialsId: 'dockerhub-pass', usernameVariable: 'DOCKER_USER', passwordVariable: 'DOCKER_PASS')]) {
+                    sh '''
+                        echo "🔐 Logging in to Docker Hub..."
+                        echo "$DOCKER_PASS" | docker login -u "$DOCKER_USER" --password-stdin
+                        echo "🚀 Pushing Docker image..."
+                        docker push $DOCKER_IMAGE
+                    '''
+                }
+            }
+        }
+    }
+}

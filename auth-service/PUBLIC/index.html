@@ -1,0 +1,72 @@
+<!-- public/index.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Flipkart Clone</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      background: #f1f3f6;
+    }
+    .navbar {
+      background-color: #2874f0;
+      color: white;
+      padding: 10px 20px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .navbar .logo {
+      font-size: 24px;
+      font-weight: bold;
+    }
+    .search {
+      flex: 1;
+      margin: 0 20px;
+    }
+    .search input {
+      width: 100%;
+      padding: 8px;
+      border-radius: 2px;
+      border: none;
+    }
+    .container {
+      padding: 20px;
+    }
+    .product {
+      background: white;
+      padding: 15px;
+      margin-bottom: 10px;
+      border-radius: 4px;
+      box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+    }
+  </style>
+</head>
+<body>
+
+  <div class="navbar">
+    <div class="logo">Flipkart</div>
+    <div class="search">
+      <input type="text" placeholder="Search for products, brands and more">
+    </div>
+  </div>
+
+  <div class="container">
+    <div class="product">
+      <h2>Smartphone</h2>
+      <p>Get the latest smartphone at best price.</p>
+    </div>
+    <div class="product">
+      <h2>Laptop</h2>
+      <p>Best laptops for gaming and productivity.</p>
+    </div>
+    <div class="product">
+      <h2>Headphones</h2>
+      <p>Enjoy high-quality audio with great offers.</p>
+    </div>
+  </div>
+
+</body>
+</html>
