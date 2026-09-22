@@ -95,7 +95,7 @@ post {
         emailext(
             subject: "SUCCESS: ${env.JOB_NAME} #${env.BUILD_NUMBER}",
             body: """
-```
+
 
 Deployment Successful!
 
@@ -115,14 +115,14 @@ to: "[sasikala.bedre@gmail.com](mailto:sasikala.bedre@gmail.com)"
 )
 }
 
-```
+
     failure {
         echo '❌ Deployment failed!'
 
         emailext(
             subject: "FAILED: ${env.JOB_NAME} #${env.BUILD_NUMBER}",
             body: """
-```
+
 
 Deployment Failed!
 
@@ -138,11 +138,11 @@ to: "[sasikala.bedre@gmail.com](mailto:sasikala.bedre@gmail.com)"
 )
 }
 
-```
+
     always {
         echo '📋 Jenkins deployment completed.'
     }
 }
-```
+
 
 }
