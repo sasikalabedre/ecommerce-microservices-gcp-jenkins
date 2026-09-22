@@ -1,6 +1,7 @@
 pipeline {
 agent any
 
+```
 environment {
     AUTH_IMAGE    = 'new-auth'
     ORDER_IMAGE   = 'new-order'
@@ -88,20 +89,57 @@ stages {
 }
 
 post {
-success {
-emailext(
-subject: "SUCCESS: ${env.JOB_NAME} #${env.BUILD_NUMBER}",
-body: "Jenkins Build Successful\n\nJob: ${env.JOB_NAME}\nBuild:
-${env.BUILD_NUMBER}\nStatus: SUCCESS",
-to: "sasikala.bedre@gmail.com"
+
+    success {
+        echo '✅ Deployment successful!'
+
+        emailext(
+            subject: "SUCCESS: ${env.JOB_NAME} #${env.BUILD_NUMBER}",
+            body: """
+```
+
+Jenkins Build Successful!
+
+Job: ${env.JOB_NAME}
+Build: #${env.BUILD_NUMBER}
+Status: SUCCESS
+
+Docker deployment completed successfully.
+
+Build URL: ${env.BUILD_URL}
+""",
+to: '[sasikala.bedre@gmail.com](mailto:sasikala.bedre@gmail.com)'
 )
 }
-failure {
-emailext(
-subject: "FAILED: ${env.JOB_NAME} #${env.BUILD_NUMBER}",
-body: "Jenkins Build Failed\n\nJob: ${env.JOB_NAME}\nBuild:
-${env.BUILD_NUMBER}\nStatus: FAILED",
-to: "sasikala.bedre@gmail.com"
+
+```
+    failure {
+        echo '❌ Deployment failed!'
+
+        emailext(
+            subject: "FAILED: ${env.JOB_NAME} #${env.BUILD_NUMBER}",
+            body: """
+```
+
+Jenkins Build Failed!
+
+Job: ${env.JOB_NAME}
+Build: #${env.BUILD_NUMBER}
+Status: FAILED
+
+Please check the Jenkins console output.
+
+Build URL: ${env.BUILD_URL}
+""",
+to: '[sasikala.bedre@gmail.com](mailto:sasikala.bedre@gmail.com)'
 )
 }
+
+```
+    always {
+        echo '📋 Jenkins deployment completed.'
+    }
+}
+```
+
 }
