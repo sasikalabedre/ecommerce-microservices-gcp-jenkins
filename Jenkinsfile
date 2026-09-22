@@ -1,7 +1,7 @@
 pipeline {
 agent any
 
-```
+
 environment {
     AUTH_IMAGE    = 'new-auth'
     ORDER_IMAGE   = 'new-order'
@@ -96,7 +96,7 @@ post {
         emailext(
             subject: "SUCCESS: ${env.JOB_NAME} #${env.BUILD_NUMBER}",
             body: """
-```
+
 
 Jenkins Build Successful!
 
@@ -112,14 +112,14 @@ to: '[sasikala.bedre@gmail.com](mailto:sasikala.bedre@gmail.com)'
 )
 }
 
-```
+
     failure {
         echo '❌ Deployment failed!'
 
         emailext(
             subject: "FAILED: ${env.JOB_NAME} #${env.BUILD_NUMBER}",
             body: """
-```
+
 
 Jenkins Build Failed!
 
@@ -135,11 +135,10 @@ to: '[sasikala.bedre@gmail.com](mailto:sasikala.bedre@gmail.com)'
 )
 }
 
-```
+
     always {
         echo '📋 Jenkins deployment completed.'
     }
 }
-```
 
 }
