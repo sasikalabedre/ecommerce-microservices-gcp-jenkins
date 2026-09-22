@@ -1,7 +1,6 @@
 pipeline {
 agent any
 
-```
 environment {
     AUTH_IMAGE    = 'new-auth'
     ORDER_IMAGE   = 'new-order'
