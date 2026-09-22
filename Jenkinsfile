@@ -134,7 +134,7 @@ post {
                 Please check the Jenkins console output.
                 Build URL: ${env.BUILD_URL}
             """,
-            to: "your-email@gmail.com"
+            to: "sasikala.bedre@gmail.com"
         )
     }
 }
